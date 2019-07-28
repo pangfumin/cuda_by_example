@@ -8,14 +8,15 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}")
 find_package(CUDA REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
-# find_package(GLEW REQUIRED)
+find_package(GLEW REQUIRED)
 
 
 
 
 # include_directories(${Pangolin_INCLUDE_DIRS})
 include_directories(${CUDA_INCLUDE_DIRS})
-include_directories( ${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS} )
+include_directories( ${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS}
+${GLEW_INCLUDE_DIRS} )
 
 # include_directories(${EIGEN_INCLUDE_DIRS})
 # include_directories(${SUITESPARSE_INCLUDE_DIRS})
@@ -107,4 +108,13 @@ target_link_libraries(09_hist_cpu ${CUDA_LIBRARIES} ${OPENGL_LIBRARIES}    ${GLU
 
 cuda_add_executable(09_hist_gpu_gmem_atomics chapter09/hist_gpu_gmem_atomics.cu)
 target_link_libraries(09_hist_gpu_gmem_atomics ${CUDA_LIBRARIES} ${OPENGL_LIBRARIES}    ${GLUT_LIBRARY} )
+
+
+
+# additional
+
+cuda_add_executable(simpleGL3DSurfaceWrite addtional/cuda-opengl-interop-master/texture3d-write/simpleGL3DSurfaceWrite.cpp
+                            addtional/cuda-opengl-interop-master/texture3d-write/simpleGL3DSurfaceWrite_kernel.cu)
+target_link_libraries(simpleGL3DSurfaceWrite ${CUDA_LIBRARIES} ${OPENGL_LIBRARIES}    ${GLUT_LIBRARY}  ${GLEW_LIBRARIES} )
+
 
