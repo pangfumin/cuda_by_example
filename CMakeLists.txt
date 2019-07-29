@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 2.6.0)
 
 project(cuda_by_eample)
 
+
+set(CMAKE_C_COMPILER /usr/bin/gcc-6)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}")
 
 # find_package(Pangolin 0.1 REQUIRED)
@@ -112,9 +114,12 @@ target_link_libraries(09_hist_gpu_gmem_atomics ${CUDA_LIBRARIES} ${OPENGL_LIBRAR
 
 
 # additional
+cuda_add_executable(simpleGL2DSurfaceWrite addtional/cuda-opengl-interop/texture2d-write/simpleGL2DSurfaceWrite.cpp
+                            addtional/cuda-opengl-interop/texture2d-write/simpleGL2DSurfaceWrite_kernel.cu)
+target_link_libraries(simpleGL2DSurfaceWrite ${CUDA_LIBRARIES} ${OPENGL_LIBRARIES}    ${GLUT_LIBRARY}  ${GLEW_LIBRARIES} )
 
-cuda_add_executable(simpleGL3DSurfaceWrite addtional/cuda-opengl-interop-master/texture3d-write/simpleGL3DSurfaceWrite.cpp
-                            addtional/cuda-opengl-interop-master/texture3d-write/simpleGL3DSurfaceWrite_kernel.cu)
+cuda_add_executable(simpleGL3DSurfaceWrite addtional/cuda-opengl-interop/texture3d-write/simpleGL3DSurfaceWrite.cpp
+                            addtional/cuda-opengl-interop/texture3d-write/simpleGL3DSurfaceWrite_kernel.cu)
 target_link_libraries(simpleGL3DSurfaceWrite ${CUDA_LIBRARIES} ${OPENGL_LIBRARIES}    ${GLUT_LIBRARY}  ${GLEW_LIBRARIES} )
 
 
